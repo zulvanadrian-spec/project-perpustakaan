@@ -1,0 +1,65 @@
+flowchart TD
+    A([START]) --> B[baca_data\nBaca file buku.csv]
+    B --> C{File ada?}
+    C -- Tidak --> D[data = list kosong]
+    C -- Ya --> E[Load semua row ke list data]
+    D --> F
+    E --> F[Tampilkan Menu Utama]
+
+    F --> G{Pilihan User}
+
+    G -- 1 --> H[tambah_buku]
+    G -- 2 --> I[tampilkan_data]
+    G -- 3 --> J[update_buku]
+    G -- 4 --> K[hapus_buku]
+    G -- 5 --> L[cari_buku]
+    G -- 6 --> M[sort_judul\nBubble Sort A-Z]
+    G -- 7 --> N[sort_stok\nSelection Sort DESC]
+    G -- 0 --> Z([=== END ===])
+    G -- lainnya --> O[Tampilkan: Menu tidak tersedia]
+
+    H --> H1[Input id, judul, penulis,\nkategori, stok]
+    H1 --> H2[Append ke data]
+    H2 --> H3[simpan_data -> tulis ulang CSV]
+    H3 --> H4[Print: Berhasil ditambahkan]
+
+    I --> I1[Loop semua row\nPrint tiap buku]
+
+    J --> J1[Input ID Buku]
+    J1 --> J2{ID ditemukan?}
+    J2 -- Tidak --> J3[Print: ID tidak ditemukan]
+    J2 -- Ya --> J4[Input field baru]
+    J4 --> J5[simpan_data -> tulis ulang CSV]
+    J5 --> J6[Print: Berhasil diupdate]
+
+    K --> K1[Input ID Buku]
+    K1 --> K2{ID ditemukan?}
+    K2 -- Tidak --> K3[Print: ID tidak ditemukan]
+    K2 -- Ya --> K4[data.remove buku]
+    K4 --> K5[simpan_data -> tulis ulang CSV]
+    K5 --> K6[Print: Berhasil dihapus]
+
+    L --> L1[Input keyword judul]
+    L1 --> L2[Loop data\ncek keyword in judul.lower]
+    L2 --> L3{Ada yang cocok?}
+    L3 -- Ya --> L4[Print buku yang cocok]
+    L3 -- Tidak --> L5[Print: Buku tidak ditemukan]
+
+    M --> M1[Bubble Sort berdasarkan judul]
+    M1 --> M2[tampilkan_data]
+
+    N --> N1[Selection Sort berdasarkan stok]
+    N1 --> N2[tampilkan_data]
+
+    H4 --> F
+    I1 --> F
+    J3 --> F
+    J6 --> F
+    K3 --> F
+    K6 --> F
+    L4 --> F
+    L5 --> F
+    M2 --> F
+    N2 --> F
+    O --> F
+    
